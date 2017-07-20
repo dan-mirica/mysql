@@ -1,9 +1,11 @@
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
 
 public class Main {
 	public static void main(String[] args) throws SQLException {
@@ -28,8 +30,12 @@ public class Main {
 		
 		rs = stmt.executeQuery(sql);
 		
+		SecureRandom random = new SecureRandom();
+		String randomString = new BigInteger(130,  random).toString();
+		
+		
 		rs.moveToInsertRow();
-		rs.updateString(2, "lorena");
+		rs.updateString(2, randomString);
 		rs.updateString(3, "pugescu");
 		rs.insertRow();
 
